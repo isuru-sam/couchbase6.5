@@ -8,7 +8,6 @@ import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 import org.springframework.data.couchbase.core.CouchbaseTemplate;
 import org.springframework.data.couchbase.core.convert.MappingCouchbaseConverter;
 import org.springframework.data.couchbase.repository.config.EnableCouchbaseRepositories;
-import org.springframework.data.couchbase.repository.config.ReactiveRepositoryOperationsMapping;
 import org.springframework.data.couchbase.repository.config.RepositoryOperationsMapping;
 
 import com.couchbase.client.java.Cluster;
@@ -48,13 +47,13 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 
 	@Bean
 	public CouchbaseClientFactory myCouchbaseClientFactory(Cluster couchbaseCluster) {
-		// TODO Auto-generated method stub
+		
 		return new SimpleCouchbaseClientFactory(couchbaseCluster, "account", getScopeName());
 	}
 
 	@Override
 	protected void configureRepositoryOperationsMapping(RepositoryOperationsMapping mapping) {
-		// TODO Auto-generated method stub
+		
 
 		CouchbaseTemplate empTemplate = couchbaseTemplate(
 				couchbaseClientFactory(couchbaseCluster(couchbaseClusterEnvironment())),
@@ -72,8 +71,7 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 	@Bean
 	public Transactions transactions(final Cluster couchbaseCluster) {
 		return Transactions.create(couchbaseCluster, TransactionConfigBuilder.create()
-				// The configuration can be altered here, but in most cases the defaults are
-				// fine.
+			
 				.build());
 	}
 }
